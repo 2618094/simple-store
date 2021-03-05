@@ -19,7 +19,9 @@
                     <td>{{ $product->brand->name }}</td>
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->price }}</td>
-                    <td>Buy button placeholder</td>
+                    <td>
+                        <a class="btn btn-success" href="{{ route('checkout', $product->id) }}" role="button">Buy now</a>
+                    </td>
                 </tr>
             @endforeach
             </tbody>
