@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Events\Order\OrderCreated;
+use App\Events\Order\OrderPayed;
 use App\Models\Order;
 
 class OrderService
@@ -18,5 +19,12 @@ class OrderService
         $order->save();
         OrderCreated::dispatch($order);
         return $order;
+    }
+
+    public function pay(Order $order): void
+    {
+        $order->is_payed = true;
+        $order->save();
+        OrderPayed::dispatch($order);
     }
 }

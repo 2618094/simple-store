@@ -26,5 +26,9 @@ Route::prefix('orders')->as('orders.')->group(function () {
     Route::post('/', [\App\Http\Controllers\Web\OrderController::class, 'store'])->name('store');
 });
 
+Route::prefix('payments')->as('payments.')->group(function () {
+    Route::get('/create/{order}', [\App\Http\Controllers\Web\PaymentController::class, 'create'])->name('create');
+    Route::post('/', [\App\Http\Controllers\Web\PaymentController::class, 'store'])->name('store');
+});
 
 

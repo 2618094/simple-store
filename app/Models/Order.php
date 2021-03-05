@@ -5,6 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Order
+ * @method static Order find($id)
+ */
 class Order extends Model
 {
     use HasFactory;
