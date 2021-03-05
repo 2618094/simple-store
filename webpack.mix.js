@@ -12,6 +12,6 @@ const mix = require('laravel-mix');
  */
 mix.setPublicPath('public');
 mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [])
+    .sass('resources/css/app.scss', 'public/css')
     .copy('resources/images/favicon/*', 'public')
     .copy('resources/common/robots.txt', 'public');
