@@ -2,14 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * Class User
+ * @method static Builder admins();
+ */
+
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+
+    public const ROLE_ADMIN = 'admin';
 
     /**
      * The attributes that are mass assignable.
@@ -40,4 +47,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function scopeAdmins(Builder $builder): Builder
+    {
+        return $builder->where('role', self::ROLE_ADMIN);
+    }
 }

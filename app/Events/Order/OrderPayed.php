@@ -29,4 +29,12 @@ class OrderPayed
     {
         $this->order = $order;
     }
+
+    /**
+     * @return Order
+     */
+    public function getOrder(): Order
+    {
+        return $this->order;
+    }
 }
