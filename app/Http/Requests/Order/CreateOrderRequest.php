@@ -34,6 +34,6 @@ class CreateOrderRequest extends FormRequest
 
     public function data(): CreateOrderData
     {
-        return new CreateOrderData($this->validated());
+        return CreateOrderData::fromRequest($this);
     }
 }
