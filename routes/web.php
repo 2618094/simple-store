@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', \App\Http\Controllers\Web\IndexController::class);
+
+Route::prefix('products')->as('products.')->group(function () {
+    Route::get('/', [\App\Http\Controllers\Web\ProductController::class, 'index'])->name('index');
 });
