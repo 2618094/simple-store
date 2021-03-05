@@ -12,7 +12,7 @@ class CheckoutController extends Controller
     public function __invoke(Product $product)
     {
         $product->loadMissing('brand');
-        $shippings = Shipping::active()->get();
+        $shippings = Shipping::all();
         return view('pages.checkout', compact('product', 'shippings'));
     }
 }

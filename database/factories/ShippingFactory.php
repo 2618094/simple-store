@@ -24,8 +24,7 @@ class ShippingFactory extends Factory
     {
         return [
             'name' => $this->faker->word,
-            'price' => $this->faker->randomDigit,
-            'is_active' => true
+            'price' => $this->faker->randomDigit
         ];
     }
 
