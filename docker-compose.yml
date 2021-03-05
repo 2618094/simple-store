@@ -1,0 +1,63 @@
+version: '3'
+
+services:
+
+  web:
+    image: ${WEB_IMAGE}
+    ports:
+      - '127.0.0.1:8050:80'
+    depends_on:
+      - app
+    volumes:
+      - ./public:/var/www/public
+      - ./deployment/local/web/default.conf:/etc/nginx/conf.d/default.conf
+      - ~/.cache/composer:/root/.cache/composer
+    networks:
+      - frontend-network
+
+  #For building frontend
+  node:
+    image: node:14.1.0-alpine
+    restart: on-failure
+    working_dir: /src
+    volumes:
+      - ./:/src
+
+  app:
+    image: ${APP_IMAGE}
+    depends_on:
+      - db
+    volumes:
+      - ./:/var/www
+      - ./deployment/local/app/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+    environment:
+      - PHP_ENABLE_XDEBUG=0
+    networks:
+      - backend-network
+      - frontend-network
+
+  db:
+    image: mysql:5.7
+    tmpfs: /var/lib/mysql
+    command: --innodb_use_native_aio=0
+    environment:
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./deployment/local/mysql/provision:/docker-entrypoint-initdb.d
+    networks:
+      - backend-network
+
+  redis:
+    image: redis:5.0.4
+    networks:
+      - backend-network
+
+
+networks:
+  backend-network:
+    driver: bridge
+  frontend-network:
+    driver: bridge
+
+
