@@ -4,7 +4,7 @@
     <h1>Checkout</h1>
     <div class="row">
         <div class="col-md-6">
-            <p class="lead">Product: {{ $product->name }}</p>
+            <h2>Product: {{ $product->name }}</h2>
             <p>Brand: {{ $product->brand->name }}</p>
             <p>Price: {{ $product->price }}</p>
             <form method="post" action="{{ route('orders.store') }}">
@@ -12,22 +12,21 @@
                 <h2>Shipping</h2>
                 @foreach($shippings as $shipping)
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="shipping_id" id="shipping_{{ $shipping->id }}"
+                        <input class="form-check-input @error('shipping_id') is-invalid @enderror" type="radio" name="shipping_id" id="shipping_{{ $shipping->id }}"
                                value="{{ $shipping->id }}" {{ old('shipping') == $shipping->id ?'checked' : null }}>
                         <label class="form-check-label" for="shipping_{{ $shipping->id }}">
                             {{ $shipping->name }} - {{ $shipping->price }} EUR
                         </label>
+                        @error('shipping_id')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
                 @endforeach
                 <h2>Customer details</h2>
-                <div class="mb-3">
-                    <label for="client_name" class="form-label">Client name</label>
-                    <input type="text" class="form-control" name="client_name" id="client_name" value="{{ old('client_name') }}">
-                </div>
-                <div class="mb-3">
-                    <label for="client_address" class="form-label">Client address</label>
-                    <input type="text" class="form-control" name="client_address" id="client_address" value="{{ old('client_address') }}">
-                </div>
+                @include('blocks.inputs.text', ['field' => 'client_name', 'label' => 'Name'])
+                @include('blocks.inputs.text', ['field' => 'client_address', 'label' => 'Address'])
                 <input type="hidden" name="product_id" value="{{ $product->id }}">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

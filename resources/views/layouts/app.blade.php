@@ -18,11 +18,9 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <title>@yield('title', config('app.name'))</title>
 </head>
-<body>
-    <div id="app">
-        <div class="container-fluid">
-            @yield('content')
-        </div>
-    </div>
+<body class="bg-light">
+    <main class="container">
+        @yield('content')
+    </main>
 </body>
 </html>

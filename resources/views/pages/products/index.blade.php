@@ -2,8 +2,6 @@
 @section('title', 'Products')
 @section('content')
 <h1>Our products</h1>
-<div class="row">
-    <div class="col-sm-6">
         <table class="table">
             <thead>
             <tr>
@@ -29,6 +27,4 @@
         <div class="d-flex justify-content-center">
             {!! $products->links() !!}
         </div>
-    </div>
-</div>
 @endsection
