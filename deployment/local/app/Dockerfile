@@ -1,4 +1,4 @@
-FROM php:7.4.2-fpm-buster as base
+FROM php:8.0.0-fpm-buster as base
 
 RUN apt-get update && apt-get install -y \
     git \
