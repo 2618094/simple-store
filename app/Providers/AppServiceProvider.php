@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\CurrencyApi\CbrCurrencyApi;
+use App\CurrencyApi\CurrencyApi;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
@@ -14,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(CurrencyApi::class, CbrCurrencyApi::class);
     }
 
     /**
