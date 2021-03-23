@@ -6,13 +6,14 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
  * Class User
  * @method static Builder admins();
  */
 
-class User extends Authenticatable
+class User extends Authenticatable  implements JWTSubject
 {
     use HasFactory, Notifiable;
 
@@ -51,5 +52,15 @@ class User extends Authenticatable
     public function scopeAdmins(Builder $builder): Builder
     {
         return $builder->where('role', self::ROLE_ADMIN);
+    }
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }

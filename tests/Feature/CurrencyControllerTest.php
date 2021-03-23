@@ -9,6 +9,11 @@ class CurrencyControllerTest extends TestCase
 {
 
     use DatabaseMigrations;
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->actingAs(\App\Models\User::factory()->create());
+    }
 
     public function testIndex()
     {
