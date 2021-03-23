@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('currencies')->as('currencies.')->group(function () {
+    Route::get('/', [\App\Http\Controllers\Api\CurrencyController::class, 'index'])->name('index');
+    Route::get('/{currency}', [\App\Http\Controllers\Api\CurrencyController::class, 'show'])->name('show');
 });
