@@ -18,6 +18,11 @@ return [
         'passwords' => 'users',
     ],
 
+    'default_user' => [
+        'email' => env('DEFAULT_USER_EMAIL'),
+        'password' => env('DEFAULT_USER_PASSWORD')
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards
